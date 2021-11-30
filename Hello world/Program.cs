@@ -8,10 +8,11 @@ namespace Hello_world
         {
             Console.WriteLine("Hello World!");
             Calculate calc = new Calculate();
-            calc.x = 20;
-            calc.y = 40;
+            Console.WriteLine("Enter Values");
+            calc.x = int.Parse(Console.ReadLine());
+            calc.y = int.Parse(Console.ReadLine());
 
-                int reuslt1 = calc.sum();
+            int reuslt1 = calc.sum();
             Console.WriteLine(reuslt1);
             int result2 = calc.difference();
             Console.WriteLine(result2);

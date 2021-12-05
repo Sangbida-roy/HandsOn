@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace UserDefined_DataType
 {
@@ -14,6 +14,8 @@ namespace UserDefined_DataType
             {
                 Console.WriteLine("1-Enter details");
                 Console.WriteLine("2-Print details");
+                Console.WriteLine("3-Print specific student details");
+
                 string input = Console.ReadLine();
                 if (input == "1")
                 {
@@ -22,9 +24,12 @@ namespace UserDefined_DataType
                     size = i;
 
                     if (i != 0)
+                    //while (i != 0 && i < size)
                     {
-
-                        for (int j = 0; j < i; j++)
+                        int j = 0;
+                        do
+                        //while(j<i)
+                        //for (int j = 0; j < i; j++)
                         {
                             Student st = new Student();
                             Console.WriteLine("Enter following details");
@@ -40,10 +45,10 @@ namespace UserDefined_DataType
                             Console.WriteLine("Enter Marks");
                             st.Marks = double.Parse(Console.ReadLine());
 
-
-
                             stuList.Add(st);
+                            j++;
                         }
+                        while (j < i);
                     }
                     else
                     {
@@ -52,24 +57,35 @@ namespace UserDefined_DataType
                 }
                 else if (input == "2")
                 {
-                    for (int i = 0; i < size; i++)
+                    //for (int i = 0; i < size; i++)
+                    foreach (Student item in stuList)
                     {
-                        Student st = stuList[i];
                         Console.WriteLine("Thank you for providing the details. Following are your details-");
-                        Console.WriteLine($"FirstName-{st.FN}");
-                        Console.WriteLine($"LastName-{st.LN}");
-                        Console.WriteLine($"Rollnum-{st.RollNo}");
+                        Console.WriteLine($"FirstName-{item.FN}");
+                        Console.WriteLine($"LastName-{item.LN}");
+                        Console.WriteLine($"Rollnum-{item.RollNo}");
 
-                        Console.WriteLine($"Marks-{st.Marks}");
+                        Console.WriteLine($"Marks-{item.Marks}");
                     }
                 }
+                else if (input == "3")
+                {
+                    //Console.WriteLine("Enter roll no");
+                    //var RollNo = Convert.ToInt32(Console.ReadLine());
+                    //var student = stuList.Where(x => x.RollNo == RollNo).FirstOrDefault();
+                    Console.WriteLine("Enter FirstName");
+                    var FN = Console.ReadLine();
+                    var students = stuList.Where(x => x.FN == FN).ToList();
+                    Console.WriteLine(students);
 
+
+                }
                 else
                 {
                     Console.WriteLine("Invalid Input");
                 }
-                }
             }
         }
     }
+}
 

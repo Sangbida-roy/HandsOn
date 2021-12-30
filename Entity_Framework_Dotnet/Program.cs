@@ -1,30 +1,28 @@
-﻿using ADO.NetConnection.BO;
-using ADO.NetConnection.DAL;
+﻿using Entity_Framework_Dotnet.BO;
+using Entity_Framework_Dotnet.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-namespace UserDefined_DataType
+namespace Entity_Framework_Dotnet
 {
     class Program
     {
         static void Main(string[] args)
         {
             var dal = new StudentDAL();
-            var studList = new List<Student>();
-            studList = dal.GetStudents();
-            dal.DeleteStudent(123);
-            dal.CreateStudentWithSP(new Student
+            var studList = new List<BO.StudentBO>();
+            //dal.DeleteStudent(123);
+            /*dal.CreateStudentWithSP(new StudentBO
             {
                 FN = "Umesh",
                 LN = "Roy",
                 RollNo = 12,
                 Marks = 100
 
-            });
+            });*/
 
-            var a = dal.GetStudentsByRollnum(123);
-            var b = dal.UpdateStudent(new Student
+            var a = dal.GetStudentByRollNumber(123);
+            var b = dal.UpdateStudent(new StudentBO
             {
                 FN = "Sangbida",
                 LN = "Roy",
@@ -32,7 +30,7 @@ namespace UserDefined_DataType
                 Marks = 100
 
             });
-            var c = dal.CreateStudent(new Student
+            b = dal.CreateStudent(new StudentBO
             {
                 FN = "Rahul",
                 LN = "Jain",
@@ -40,6 +38,7 @@ namespace UserDefined_DataType
                 Marks = 100
 
             });
+            
             int size = 0;
             for (; ; )
             {
@@ -53,7 +52,7 @@ namespace UserDefined_DataType
                     Console.WriteLine("Number of students");
                     int i = Convert.ToInt32(Console.ReadLine());
                     size = i;
-                    
+
 
                     if (i != 0)
                     {
@@ -62,7 +61,7 @@ namespace UserDefined_DataType
                         //while(j<i)
                         //for (int j = 0; j < i; j++)
                         {
-                            var st = new Student();
+                            var st = new BO.StudentBO();
                             Console.WriteLine("Enter following details");
                             Console.WriteLine("Enter first name");
                             st.FN = Console.ReadLine();
@@ -76,8 +75,8 @@ namespace UserDefined_DataType
                             Console.WriteLine("Enter Marks");
                             st.Marks = double.Parse(Console.ReadLine());
 
-                            studList.Add(st);
-                            b = dal.CreateStudent(st);
+                            //studList.Add(st);
+                            dal.CreateStudent(st);
                             j++;
                         }
                         while (j < i);
@@ -92,14 +91,14 @@ namespace UserDefined_DataType
                 {
                     //for (int i = 0; i < size; i++)
                     studList = dal.GetStudents();
-                    foreach (Student item in studList)
+                    foreach (var st in studList)
                     {
                         Console.WriteLine("Thank you for providing the details. Following are your details-");
-                        Console.WriteLine($"FirstName-{item.FN}");
-                        Console.WriteLine($"LastName-{item.LN}");
-                        Console.WriteLine($"Rollnum-{item.RollNo}");
+                        Console.WriteLine($"FirstName-{st.FN}");
+                        Console.WriteLine($"LastName-{st.LN}");
+                        Console.WriteLine($"Rollnum-{st.RollNo}");
 
-                        Console.WriteLine($"Marks-{item.Marks}");
+                        Console.WriteLine($"Marks-{st.Marks}");
                     }
                 }
                 else if (input == "3")
@@ -136,8 +135,7 @@ namespace UserDefined_DataType
                 {
                     Console.WriteLine("Invalid Input");
                 }
-                }
             }
         }
     }
-
+}

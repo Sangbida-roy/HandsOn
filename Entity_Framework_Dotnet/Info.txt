@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext -Connection "Server=LAPTOP-AJSES40D; Database=Training; Trusted_Connection=True;" -Provider "Microsoft.EntityFrameworkCore.SqlServer" -OutputDir "DB" -Context "TrainingDbContext" -Tables "Student","Branch" -NoPluralize -Force

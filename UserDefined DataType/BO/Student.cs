@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserDefined_DataType
+namespace ADO.NetConnection.BO
 {
     public class Student
     {
         private string _FN;
         private string _LN;
-        private int _rollno;
-        private double _marks;
+        private int? _rollno;
+        private double? _marks;
+        private DateTime? _dob;
 
         public string FN
         {
@@ -37,7 +38,7 @@ namespace UserDefined_DataType
             }
         }
 
-        public int RollNo
+        public int? RollNo
         {
             get
             {
@@ -49,7 +50,7 @@ namespace UserDefined_DataType
             }
         }
 
-        public double Marks
+        public double? Marks
         {
             get
             {
@@ -60,6 +61,22 @@ namespace UserDefined_DataType
                 _marks = value;
             }
         } 
+
+        public int? ID { get; set; }
+
+        public string DateOfBirth
+        {
+            get
+            {
+                if (_dob == null)
+                    return string.Empty;
+                return _dob.Value.ToString("dd-MM-yyyy");
+            }
+            set
+            {
+                _dob = Convert.ToDateTime(value);
+            }
+        }
             
 
     }

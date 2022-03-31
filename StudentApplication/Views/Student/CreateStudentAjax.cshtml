@@ -1,0 +1,92 @@
+﻿@model StudentApplication.BO.StudentBO
+@{
+    ViewBag.Title = "CreateStudentAjax";
+}
+
+<h2>CreateStudentAjax</h2>
+@using (Html.BeginForm(null, null, FormMethod.Get, new { id = "frmCreateStudent" }))
+{
+
+
+    <div class="form-horizontal">
+        <h4>StudentBO</h4>
+        <hr />
+        
+        <div class="form-group">
+            @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FN, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LN, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Marks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Marks, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Branch, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnCreate" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $('#btnCreate').click(function (e) {
+            var formData = $('#frmCreateStudent').serialize();
+            console.log(formData);
+            
+            $.ajax({
+                url: "/Student/CreateStudentAjax",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    if (data.Success) {
+                        alert("New Student has been Created Successfully");
+
+                        location.href = "/Student/GetAllStudentsJsonView";
+                    }
+                    else {
+                        alert(data.Error);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }
+            });
+        });
+    });
+</script>

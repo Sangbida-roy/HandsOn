@@ -20,7 +20,7 @@ namespace Entity_Framework_Dotnet.DAL
                 .AddJsonFile("appsettings.json")
                 .Build();
             var connectionString = configuration.GetConnectionString("DBConnectionString");
-            var dbContextOptions = new DbContextOptionsBuilder<TrainingDbContext>().UseSqlServer().Options;
+            var dbContextOptions = new DbContextOptionsBuilder<TrainingDbContext>().UseSqlServer(connectionString).Options;
             _db = new TrainingDbContext(dbContextOptions);
         }
         public bool CreateStudent(StudentBO student)

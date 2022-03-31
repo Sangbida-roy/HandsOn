@@ -1,0 +1,55 @@
+﻿@model System.Collections.Generic.List<StudentApplication.BO.StudentBO>
+
+@{
+    ViewBag.Title = "Student List";
+}
+
+<!DOCTYPE html>
+<script src="~/Scripts/Custom/Student.js"></script>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Student Json View</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Student List</h2>
+        <p> All Student's Information</p>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-10">
+                @Html.ActionLink("Create Student", "CreateStudentAjax") @*null, new {id="lnkCreateStudent"})*@
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>RollNo</th>
+                    <th>Marks</th>
+                    <th>Branch</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FN</td>
+                        <td>@item.LN</td>
+                        <td>@item.RollNo</td>
+                        <td>@item.Marks</td>
+                        <td>@item.Branch</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>
+
+
